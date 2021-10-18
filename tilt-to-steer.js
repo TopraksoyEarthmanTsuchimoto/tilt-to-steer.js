@@ -5,6 +5,8 @@
 /* It only gives you numbers that will hopefully be good enough to steer a car in a racing game etc that would run in any screen orientation. */
 /* Find the smoothSteerDeg variable and use it */
 /* ___ */
+/* A Must-See » https://speakworldlanguages.app */
+/* ___ */
 
 let theDeviceIsRotated;
 function handlePortraitOrLandscape() {
