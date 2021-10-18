@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <style>
       div{width:300px; height: 42px; background-color: lightgrey; margin: 5px; font-size: 5vmin; border-radius: 5px; padding: 3px;}
-      main{position:fixed; top:0px; left:50%; width:100vmin; height:100vmin; transform: translateX(-50%); overflow: visible;}
+      main{position:fixed; top:50%; left:50%; width:100vmin; height:100vmin; transform: translate(-50%,-50%); overflow: visible;}
+      @media (orientation:portrait) {  main{top:70vh;}  }
+      @media (orientation:landscape) {  main{left:70vw;}  }
       nav{position: absolute; top:0px; left:0px; width:100vmin; height:100vmin; display: flex; align-items: center; justify-content: center;}
     </style>
   </head>
