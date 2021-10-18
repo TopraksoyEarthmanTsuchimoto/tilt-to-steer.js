@@ -142,10 +142,13 @@
       window.addEventListener("deviceorientation",handleTilt);
     }
 
+
+
+    document.getElementById('rotate').style.transform = "rotate("+steerDeg.toFixed(1)+"deg)";
     </script>
     <!-- END OF THE CODE -->
     <script>
-      document.getElementById('rotate').style.transform = "rotate("+steerDeg+"deg)";
+
     </script>
   </body>
 </html>
