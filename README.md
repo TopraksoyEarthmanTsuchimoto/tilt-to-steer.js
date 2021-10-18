@@ -7,6 +7,6 @@ This library converts raw deviceorientation data (mobile device tilt in degrees)
 Try it live,
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer-js/
 ___
-##### This library was created during the development of the speakworldlanguages app
+##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages)
 ##### See the app if you are interested in learning world languages or you could also just have some fun with a voice controlled app.
 https://speakworldlanguages.app
