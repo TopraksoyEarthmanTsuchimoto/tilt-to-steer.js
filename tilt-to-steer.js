@@ -4,6 +4,7 @@
 /* NOTE: This library does not feature a perfect solution to the gimbal lock problem. */
 /* It only gives you numbers that will hopefully be good enough to steer a car in a racing game etc that would run in any screen orientation. */
 /* Find the smoothSteerDeg variable and use it */
+/* NOTE: It would be a good idea to implement a max-rotation limit and adjust that to match the design of your app */
 /* ___ */
 /* A Must-See » https://speakworldlanguages.app */
 /* ___ */
