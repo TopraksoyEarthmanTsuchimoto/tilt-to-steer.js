@@ -95,7 +95,7 @@
         if (-90<=b && b<=90) { steerDeg = g;      } // Fix plus&minus signs
         else                 { steerDeg = g*(-1); } // Fix plus&minus signs
         // REMEDY FOR GIMBAL-LOCK
-        fixGimbalLock();
+        fixGimbalLock(); // Not perfect but perhaps good enough
       } else if (theDeviceIsRotated == "toTheLeft") {
         if (-90<g && g<0 && Math.abs(b)<=90) {
           steerDeg =  b;
@@ -130,7 +130,7 @@
         if (-90<=b && b<=90) { steerDeg = g*(-1); } // Fix plus&minus signs
         else                 { steerDeg = g;      } // Fix plus&minus signs
         // REMEDY FOR GIMBAL-LOCK
-        fixGimbalLock();
+        fixGimbalLock(); // Not perfect but perhaps good enough
       } else {
         // Impossible 5th orientation
       }
