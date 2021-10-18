@@ -135,6 +135,7 @@
       }
 
       document.getElementById('steer').innerHTML = "steer "+steerDeg.toFixed(1); // Uncomment to test
+      document.getElementById('rotate').style.transform = "rotate("+steerDeg.toFixed(1)+"deg)"; // Uncomment to test
     }
 
     window.addEventListener("load",startReadingTilt,{once:true});
@@ -144,7 +145,7 @@
 
 
 
-    document.getElementById('rotate').style.transform = "rotate("+steerDeg.toFixed(1)+"deg)";
+
     </script>
     <!-- END OF THE CODE -->
     <script>
