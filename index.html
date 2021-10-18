@@ -8,8 +8,8 @@
     <style>
       div{width:300px; height: 42px; background-color: lightgrey; margin: 5px; font-size: 5vmin; border-radius: 5px; padding: 3px;}
       main{position:fixed; top:50%; left:50%; width:100vmin; height:100vmin; transform: translate(-50%,-50%); overflow: visible;}
-      @media (orientation:portrait) {  main{top:70vh;}  }
-      @media (orientation:landscape) {  main{left:70vw;}  }
+      @media (orientation:portrait) {  main{top:65vh;}  }
+      @media (orientation:landscape) {  main{left:72vw;}  }
       nav{position: absolute; top:0px; left:0px; width:100vmin; height:100vmin; display: flex; align-items: center; justify-content: center;}
     </style>
   </head>
@@ -18,7 +18,7 @@
       <nav>
         <img src="steer.png" alt="https://speakworldlanguages.app" style="width:75vmin;">
       </nav>
-      <nav>
+      <nav id="rotate">
         <img src="steeer.png" alt="https://speakworldlanguages.app" style="width:75vmin;">
       </nav>
     </main>
@@ -145,7 +145,7 @@
     </script>
     <!-- END OF THE CODE -->
     <script>
-      document.getElementsByTagName('MAIN')[0].children[1].style.transform = "rotate("+steerDeg+"deg)";
+      document.getElementById('rotate').style.transform = "rotate("+steerDeg+"deg)";
     </script>
   </body>
 </html>
