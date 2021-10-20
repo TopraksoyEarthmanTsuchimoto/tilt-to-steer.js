@@ -12,5 +12,5 @@ Call `startReadingTilt()` and then use `smoothSteerDeg` variable to rotate thing
   
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
-##### [See the app](https://speakworldlanguages.app) if you are interested in learning world languages or you could also just have some fun with the voice controlled games within the app.
+##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or voice controlled games.
 https://speakworldlanguages.app
