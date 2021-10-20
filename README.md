@@ -6,6 +6,10 @@ This library converts raw deviceorientation data (mobile device tilt in degrees)
 
 Try it live,
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer-js/
+  
+## Usage
+Call `startReadingTilt()` and then use `smoothSteerDeg` variable to rotate things, make things turn or go creative with it.
+  
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
 ##### [See the app](https://speakworldlanguages.app) if you are interested in learning world languages or you could also just have some fun with the voice controlled games within the app.
