@@ -2,7 +2,7 @@
 ### Turn your tablet or phone into a steering wheel!
 This library converts raw `deviceorientation` data (mobile device tilt in degrees) into usable good numbers.
 
-- NOTE: This library does not feature a *perfect-in-theory* kind of solution to the gimbal lock problem. It only gives you numbers that will hopefully be **good enough**  to steer a car in a racing game that would run in any screen orientation.
+- NOTE: This library does not feature a *perfect* solution to the gimbal lock problem. It only gives you numbers that will hopefully be **good enough**  to steer a car in a racing game that would run in any screen orientation.
 
 Try it live,
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer-js/
@@ -22,5 +22,5 @@ And then inject tilt-to-steer.js like this,
     
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
-##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or voice controlled games.
+##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or trying voice controlled games.
 https://speakworldlanguages.app
