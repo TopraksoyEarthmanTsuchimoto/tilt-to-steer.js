@@ -28,6 +28,8 @@ https://dev.to/li/how-to-requestpermission-for-devicemotion-and-deviceorientatio
 and be careful about `touchstart-not-working`
 https://developer.apple.com/forums/thread/128376
 
+## How to improve
+See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer-js/issues/2)
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
 ##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or trying voice controlled games.
