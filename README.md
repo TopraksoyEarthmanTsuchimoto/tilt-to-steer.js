@@ -8,7 +8,7 @@ Try it live (you will need an Android tablet or phone)
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer-js/
   
 ## Usage
-Call `startReadingTilt()` and then use `smoothSteerDeg` variable to rotate things, make things turn or go creative with it.  
+Call `startReadingTilt()` and then use `smoothSteerDeg` variable inside a `requestAnimationFrame()` loop to rotate things, make things turn or go creative with it.  
   
 You may want to use a device detector [like this](https://github.com/PoeHaH/devicedetector) or a ua-parser [like this](https://github.com/faisalman/ua-parser-js) to make sure that the user is on a mobile device before running the code.
 And then inject tilt-to-steer.js like this,
@@ -20,7 +20,7 @@ And then inject tilt-to-steer.js like this,
     script.src = url;
     document.head.appendChild(script);
     
-As of 2021 **iOS** devices won't let your app to access `deviceorientation` by default.
+As of 2021 **iOS** devices won't let your app access `deviceorientation` by default.
 You will have to prompt the user for permission.
 See,
 https://dev.to/li/how-to-requestpermission-for-devicemotion-and-deviceorientation-events-in-ios-13-46g2
