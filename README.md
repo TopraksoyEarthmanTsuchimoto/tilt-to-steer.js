@@ -1,10 +1,11 @@
 # tilt-to-steer-js
-### Turn your tablet or phone into a steering wheel!
+#### Turn your tablet or phone into a steering wheel!
 This library converts raw `deviceorientation` data (mobile device tilt in degrees) into usable good numbers.
 
 - NOTE: This library does not feature a *perfect* solution to the gimbal lock problem. But the current version is **good enough**  to, for example steer a car, in a racing game that would run in any screen orientation.
 
-Try it live (you will need an Android tablet or phone)
+## **Try it live** (you will need an Android tablet or phone)
+
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer-js/
   
 ## Usage
