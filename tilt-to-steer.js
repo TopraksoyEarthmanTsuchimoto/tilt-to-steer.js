@@ -7,6 +7,8 @@
 /* Call startReadingTilt() and then */
 /* Use the smoothSteerDeg variable to rotate or turn things */
 /* NOTE: It would be a good idea to implement a max-rotation limit and adjust that to match the design of your app */
+/* iOS: As of 2021 iOS devices won't let your app access deviceorientation by default. You will have to prompt the user for permission. */
+/* See the readme on https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer-js to learn more about that */
 /* ___ */
 /* This js library has been created during the development of » https://speakworldlanguages.app */
 /* ___ */
