@@ -19,7 +19,7 @@ And then inject tilt-to-steer.js like this,
     script.async = true;
     script.onload = () => startTheApp(); // Create your own startTheApp() function or smth like that.
     script.src = url;
-    document.head.appendChild(script);
+    document.body.appendChild(script);
     
 As of 2021 **iOS** devices won't let your app access `deviceorientation` by default.
 You will have to prompt the user for permission.
