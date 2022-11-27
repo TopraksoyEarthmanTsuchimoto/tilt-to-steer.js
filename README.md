@@ -1,4 +1,4 @@
-# tilt-to-steer-js
+# tilt-to-steer.js
 #### Turn your tablet or phone into a steering wheel!
 This library converts raw `deviceorientation` data (mobile device tilt in degrees) into usable good numbers.
 
@@ -6,7 +6,7 @@ This library converts raw `deviceorientation` data (mobile device tilt in degree
 
 ## **Try it live** (you will need an Android tablet or phone)
 
-https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer-js/
+https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer.js/
   
 ## Usage
 Call `startReadingTilt()` and then use `smoothSteerDeg` variable inside a `requestAnimationFrame()` loop to rotate things, make things turn or go creative with it.  
@@ -29,7 +29,7 @@ and be careful about `touchstart-not-working`
 https://developer.apple.com/forums/thread/128376
 
 ## How to improve
-See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer-js/issues/2)
+See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer.js/issues/2)
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
 ##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or trying voice controlled games.
