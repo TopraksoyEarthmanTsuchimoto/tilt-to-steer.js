@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
     <!-- You must use a mobile device to view this page -->
-    <script defer src="tilt-to-steer.js" onload="startReadingTilt();"></script>
+    <script defer src="tilt-to-steer.js" onload="startReadingTilt(); startMetrics();"></script>
     <!-- Uncomment the following to be able to use the browser console on mobile devices -->
     <!-- <script src="third_party_js/eruda.min.js"></script> -->
     <!-- <script>eruda.init();</script> -->
@@ -52,7 +52,7 @@
     handlePortraitOrLandscapeINLINE(); // Set for the first time
     window.addEventListener("resize",handlePortraitOrLandscapeINLINE); // Update when change happens
 
-    window.addEventListener("load",startMetrics,{once:true});
+    // window.addEventListener("load",startMetrics,{once:true}); // Window load is too early
     function startMetrics() {
       window.addEventListener("deviceorientation",handleTiltINLINE);
     }
