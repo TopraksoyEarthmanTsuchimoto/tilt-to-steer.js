@@ -12,9 +12,13 @@ https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer.js/
 Call `startReadingTilt()` and then use `smoothSteerDeg` variable inside a `requestAnimationFrame()` loop to rotate things, make things turn or go creative with it.  
   
 You may want to use a device detector [like this](https://github.com/PoeHaH/devicedetector) or a ua-parser [like this](https://github.com/faisalman/ua-parser-js) to make sure that the user is on a mobile device before running the code.
-And then inject tilt-to-steer.js like this,
+In addition to linking it like
 
-    const url = 'yourfoldername/tilt-to-steer.js';
+    <script defer src="tilt-to-steer.js"></script>
+    
+you can also inject tilt-to-steer.js only when needed in your app like this,
+
+    const url = 'tilt-to-steer.js'; // Or /whateverfoldername/tilt-to-steer.js
     const script = document.createElement('script');
     script.async = true;
     script.onload = () => startTheApp(); // Create your own startTheApp() function or smth like that.
