@@ -15,7 +15,7 @@
 
 // According to MDN web docs "window.orientation" is deprecated, but is expected to work on iOS and WebView
 let theDeviceIsRotated;
-function screenOrientationHasCertainlyChanged() {
+function screenOrientationHasChanged() {
   setTimeout(afterAnUnnoticableDelay,100); // This solves the wrong-firing-order issue on Samsung Browser.
   function afterAnUnnoticableDelay() {
     if (screen.orientation) { // Mainly for Android (as of 2022)
@@ -33,7 +33,7 @@ function screenOrientationHasCertainlyChanged() {
     }
   }
 }
-screenOrientationHasCertainlyChanged(); // Maybe it hasn't changed yet but we just have to do a first run to set the value of theDeviceIsRotated
+screenOrientationHasChanged(); // Maybe it hasn't changed yet but we just have to do a first run to set the value of theDeviceIsRotated
 // CAUTION: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
 // THEREFORE WE CANNOT RELY ON window.addEventListener("resize",screenOrientationHasChanged);
 // AND THERE IS THE EXACT SAME PROBLEM WITH
@@ -41,7 +41,10 @@ screenOrientationHasCertainlyChanged(); // Maybe it hasn't changed yet but we ju
 // ALSO WITH
 // window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 
-// AS OF 2022 THE ONLY RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE is by using setInterval
+// THIS MEANS: AS OF 2022 THERE IS NO RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE even by using setInterval
+// BECAUSE neither screen.orientation.angle nor screen.orientation.type is updated when you go from 90 to 270 without triggering a portrait view in between
+/*
+// HERE IS THE CODE THAT COULD WORK IF THAT WAS NOT THE CASE
 let lastTimeWeCheckedTheOrientationWas;
 function saveLastDetectedScreenOrientation() {
   if (screen.orientation) { // Mainly for Android (as of 2022)
@@ -68,7 +71,15 @@ function checkIfOrientationHasChanged() {
   // Update
   saveLastDetectedScreenOrientation();
 }
+*/
+// So we just have to hope that the user will trigger a portrait mode between 90 and 270
+if (screen.orientation) {
 
+} else {
+
+}
+
+// ----------------
 // Use var instead of let for things that could be accessed from elsewhere
 var b; // Adjust and use beta for steering when in landscape mode
 var g; // Adjust and use gamma for steering when in portrait mode after dealing with the gimbal lock problem using beta
