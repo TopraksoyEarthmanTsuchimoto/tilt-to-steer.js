@@ -9,8 +9,8 @@
     <!-- You must use a mobile device to view this page -->
     <script defer src="tilt-to-steer.js" onload="startReadingTilt(); startMetrics();"></script>
     <!-- Uncomment the following to be able to use the browser console on mobile devices -->
-    <script src="eruda.min.js"></script>
-    <script>eruda.init();</script>
+    <!-- <script src="eruda.min.js"></script> -->
+    <!-- <script>eruda.init();</script> -->
 
     <style>
       div{width:270px; height: 42px; background-color: lightgrey; margin: 5px; font-size: 1.2rem; border-radius: 5px; padding: 3px;}
@@ -40,7 +40,7 @@
     const main = document.getElementsByTagName('main')[0];
     main.addEventListener("touchend",checkPermission,{once:true});
     function checkPermission() {
-      // feature detect
+      // feature detect (on iOS)
       if (typeof DeviceOrientationEvent.requestPermission === 'function') {
         alert("Choose allow to activate");
         DeviceOrientationEvent.requestPermission()
@@ -53,7 +53,7 @@
           .catch(console.error);
       } else {
         // handle regular non iOS 13+ devices
-        console.log("DeviceOrientationEvent.requestPermission is not available");
+        console.log("DeviceOrientationEvent.requestPermission is not available"); // Android Chrome
       }
     }
     // window.addEventListener("load",startReadingTilt,{once:true}); // Start running tilt-to-steer.js // THROWS: Uncaught ReferenceError: startReadingTilt is not defined
