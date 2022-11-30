@@ -35,7 +35,8 @@ function handlePortraitOrLandscape() {
 handlePortraitOrLandscape(); // Set for the first time
 // WARNING: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
 // THEREFORE WE CANNOT RELY ON window.addEventListener("resize",handlePortraitOrLandscape);
-if (screen.orientation) {
+if (screen.orientation && false) {
+  // EXACT SAME PROBLEM WITH THIS
   window.screen.orientation.addEventListener('change',handlePortraitOrLandscape); // https://whatwebcando.today/screen-orientation.html
 } else {
   // According to MDN web docs this is deprecated, but is expected to work on iOS and WebView
