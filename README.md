@@ -32,8 +32,12 @@ https://dev.to/li/how-to-requestpermission-for-devicemotion-and-deviceorientatio
 and be careful about `touchstart-not-working`
 https://developer.apple.com/forums/thread/128376
 
+## Logic
+We just try to divide the `gamma` value by a number to tame its craziness as gimbal lock happens. The denominator is calculated dynamically by watching `beta`.
+
 ## How to improve
-See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer.js/issues/2)
+  - Challenge yourself and see if you can come up with a more precise equation for the __`gamma` suppression denominator__ 
+  - See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer.js/issues/2)
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
 ##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or trying voice controlled games.
