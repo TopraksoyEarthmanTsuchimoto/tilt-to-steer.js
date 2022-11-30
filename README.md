@@ -7,24 +7,24 @@ This library converts raw `deviceorientation` data (mobile device tilt in degree
 ## **Try it live** (you will need an Android tablet or phone)
 
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer.js/
-  
+
 ## Usage
 Call `startReadingTilt()` and then use `smoothSteerDeg` variable inside a `requestAnimationFrame()` loop to rotate things, make things turn or go creative with it.  
-  
+
 You may want to use a device detector [like this](https://github.com/PoeHaH/devicedetector) or a ua-parser [like this](https://github.com/faisalman/ua-parser-js) to make sure that the user is on a mobile device before running the code.
 In addition to linking it like
 
     <script defer src="tilt-to-steer.js"></script>
-    
+
 you can also inject tilt-to-steer.js only when needed in your app like this,
 
-    const url = 'tilt-to-steer.js'; // Or /whateverfoldername/tilt-to-steer.js
+    const url = 'tilt-to-steer.js'; // Or "/whateverfoldername/tilt-to-steer.js"
     const script = document.createElement('script');
     script.async = true;
-    script.onload = () => startTheApp(); // Create your own startTheApp() function or smth like that.
+    script.onload = () => startReadingTilt(); // Or create your own startTheApp() function or smth like that.
     script.src = url;
     document.body.appendChild(script);
-    
+
 As of 2021 **iOS** devices won't let your app access `deviceorientation` by default.
 You will have to prompt the user for permission.
 See,
@@ -36,8 +36,25 @@ https://developer.apple.com/forums/thread/128376
 We just try to divide the `gamma` value by a number to tame its craziness as gimbal lock happens. The denominator is calculated dynamically by watching `beta`.
 
 ## How to improve
-  - Challenge yourself and see if you can come up with a more precise equation for the __`gamma` suppression denominator__ 
+  - Challenge yourself and see if you can come up with a more precise equation for the __`gamma` suppression denominator__
   - See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer.js/issues/2)
+
+## Notes
+You may want to lock the screen orientation because as of 2022 it is impossible to detect the orientation change when user goes from 90 deg to 270 deg without triggering a portrait view in between.
+```
+var screenOrientationCannotBeLocked = false;
+function lockOrientation() {
+  setTimeout(function () {
+    if (screen.orientation) { // WORKS ONLY WHEN FULLSCREEN IS ON
+      const lastOrientation = screen.orientation.type;
+      parent.window.screen.orientation.lock(lastOrientation);
+      // console.log("lockOrientation fired");
+    } else {
+      screenOrientationCannotBeLocked = true;
+    }
+  }, 100); // Small delay as a safety measure
+}
+```
 ___
 ##### This library was created during the development of the [speakworldlanguages app](https://github.com/speakworldlanguages).
 ##### [See the app](https://speakworldlanguages.app) if you are interested in learning languages or trying voice controlled games.
