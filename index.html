@@ -42,7 +42,7 @@
     function handlePortraitOrLandscapeINLINE() {
       setTimeout(afterAnUnnoticableDelay,100); // This solves the wrong-firing-order issue on Samsung Browser.
       function afterAnUnnoticableDelay() {
-        if (screen.orientation) { // Mainly for Android (as of 2021)
+        if (screen.orientation && false) { // Mainly for Android (as of 2021)
           alert("screen orientation changed");
           document.getElementById('or7on').innerHTML = "Screen rotation:" + screen.orientation.angle; // Returns 0 or 90 or 270 or 180
         } else { // Mainly for iOS (as of 2021)
