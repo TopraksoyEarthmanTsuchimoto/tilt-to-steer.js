@@ -9,7 +9,10 @@ This library converts raw `deviceorientation` data (mobile device tilt in degree
 https://topraksoyearthmantsuchimoto.github.io/tilt-to-steer.js/
 
 ## Usage
-Call `startReadingTilt()` and then use `smoothSteerDeg` variable inside a `requestAnimationFrame()` loop to rotate things, make things turn or go creative with it.  
+Call `startReadingTilt()` and then use `smoothSteerDeg` variable
+  - Either inside a `requestAnimationFrame()` loop
+  - Or inside a function like `updateThings()` once you are good to go with `window.addEventListener("deviceorientation",updateThings)`
+and then you can rotate any element by changing its `transform: rotate()` or perhaps move an element by changing its `left` and `top` or `margin-left` and `margin-top`.  
 
 You may want to use a device detector [like this](https://github.com/PoeHaH/devicedetector) or a ua-parser [like this](https://github.com/faisalman/ua-parser-js) to make sure that the user is on a mobile device before running the code.
 In addition to linking it like
