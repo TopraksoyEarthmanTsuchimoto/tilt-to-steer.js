@@ -13,36 +13,61 @@
 /* Use the smoothSteerDeg variable to rotate or turn things */
 /* NOTE: It would be a good idea to implement a max-rotation limit and adjust that to match the design of your app */
 
+// According to MDN web docs "window.orientation" is deprecated, but is expected to work on iOS and WebView
 let theDeviceIsRotated;
-function handlePortraitOrLandscape() {
+function screenOrientationHasCertainlyChanged() {
   setTimeout(afterAnUnnoticableDelay,100); // This solves the wrong-firing-order issue on Samsung Browser.
   function afterAnUnnoticableDelay() {
-    if (screen.orientation) { // Mainly for Android (as of 2021)
+    if (screen.orientation) { // Mainly for Android (as of 2022)
       // screen.orientation.angle returns 0 or 90 or 270 or 180
       if (screen.orientation.angle == 0)   {    theDeviceIsRotated="no";     }
       if (screen.orientation.angle == 90)  {    theDeviceIsRotated="toTheLeft";     }
       if (screen.orientation.angle == 270) {    theDeviceIsRotated="toTheRight";     }
       if (screen.orientation.angle == 180) {    theDeviceIsRotated="upsideDown";     }
-    } else { // Mainly for iOS (as of 2021)
+    } else { // Mainly for iOS (as of 2022)
       // window.orientation returns 0 or 90 or -90 or 180
       if (window.orientation == 0)   {    theDeviceIsRotated="no";     }
       if (window.orientation == 90)  {    theDeviceIsRotated="toTheLeft";     }
       if (window.orientation == -90) {    theDeviceIsRotated="toTheRight";     }
       if (window.orientation == 180) {    theDeviceIsRotated="upsideDown";     }
     }
+    // Update
+    recordNewOrientation();
   }
 }
-handlePortraitOrLandscape(); // Set for the first time
-// WARNING: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
-// THEREFORE WE CANNOT RELY ON window.addEventListener("resize",handlePortraitOrLandscape);
-if (screen.orientation && false) {
-  // EXACT SAME PROBLEM WITH THIS
-  window.screen.orientation.addEventListener('change',handlePortraitOrLandscape); // https://whatwebcando.today/screen-orientation.html
-} else {
-  // According to MDN web docs this is deprecated, but is expected to work on iOS and WebView
-  window.addEventListener("orientationchange",handlePortraitOrLandscape); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
-}
+screenOrientationHasCertainlyChanged(); // Set for the first time
+// CAUTION: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
+// THEREFORE WE CANNOT RELY ON window.addEventListener("resize",screenOrientationHasChanged);
+// THERE IS THE EXACT SAME PROBLEM WITH
+// window.screen.orientation.addEventListener('change',screenOrientationHasChanged); // https://whatwebcando.today/screen-orientation.html
+// AND
+// window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 
+// AS OF 2022 THE ONLY RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE is by using setInterval
+let lastTimeWeCheckedTheOrientationWas;
+function recordNewOrientation() {
+  if (screen.orientation) { // Mainly for Android (as of 2022)
+    lastTimeWeCheckedTheOrientationWas = screen.orientation.angle;
+  } else { // Mainly for iOS (as of 2022)
+    lastTimeWeCheckedTheOrientationWas = window.orientation;
+  }
+}
+recordNewOrientation();
+
+setInterval(checkIfOrientationHasChanged, 200); // Keep checking
+function checkIfOrientationHasChanged() {
+  if (screen.orientation) { // Mainly for Android (as of 2022)
+    // screen.orientation.angle returns 0 or 90 or 270 or 180
+    if (lastTimeWeCheckedTheOrientationWas != screen.orientation.angle) {
+      screenOrientationHasCertainlyChanged();
+    }
+  } else { // Mainly for iOS (as of 2022)
+    // window.orientation returns 0 or 90 or -90 or 180
+    if (lastTimeWeCheckedTheOrientationWas != window.orientation) {
+      screenOrientationHasCertainlyChanged();
+    }
+  }
+}
 
 // Use var instead of let for things that could be accessed from elsewhere
 var b; // Adjust and use beta for steering when in landscape mode

@@ -29,7 +29,7 @@
         <img src="png/steeer.png" alt="https://speakworldlanguages.app" style="width:75vmin;">
       </nav>
     </main>
-    <div id="or7on">Not available</div>
+    <div id="screenRotationAngle">Not available</div>
     <div id="rawBeta">Not available</div>
     <div id="rawGamma">Not available</div>
     <div id="dev">Not available</div>
@@ -42,23 +42,45 @@
     function handlePortraitOrLandscapeINLINE() {
       setTimeout(afterAnUnnoticableDelay,100); // This solves the wrong-firing-order issue on Samsung Browser.
       function afterAnUnnoticableDelay() {
-        if (screen.orientation && false) { // Mainly for Android (as of 2021)
-          alert("screen orientation changed");
-          document.getElementById('or7on').innerHTML = "Screen rotation:" + screen.orientation.angle; // Returns 0 or 90 or 270 or 180
+        if (screen.orientation) { // Mainly for Android (as of 2021)
+          document.getElementById('screenRotationAngle').innerHTML = "Screen rotation:" + screen.orientation.angle; // Returns 0 or 90 or 270 or 180
         } else { // Mainly for iOS (as of 2021)
-          document.getElementById('or7on').innerHTML = "Screen rotation:" + window.orientation; // Returns 0 or 90 or -90 or 180
+          document.getElementById('screenRotationAngle').innerHTML = "Screen rotation:" + window.orientation; // Returns 0 or 90 or -90 or 180
         }
       }
     }
     handlePortraitOrLandscapeINLINE(); // Set for the first time
-    // CANNOT RELY ON window.addEventListener("resize",handlePortraitOrLandscapeINLINE);
-    // BECAUSE: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
-    if (screen.orientation && false) {
-      // EXACT SAME PROBLEM WITH THIS
-      window.screen.orientation.addEventListener('change',handlePortraitOrLandscapeINLINE); // https://whatwebcando.today/screen-orientation.html
-    } else {
-      // According to MDN web docs this is deprecated, but is expected to work on iOS and WebView
-      window.addEventListener("orientationchange",handlePortraitOrLandscapeINLINE); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
+    // CAUTION: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
+    // THEREFORE WE CANNOT RELY ON window.addEventListener("resize",screenOrientationHasChanged);
+    // THERE IS THE EXACT SAME PROBLEM WITH
+    // window.screen.orientation.addEventListener('change',screenOrientationHasChanged); // https://whatwebcando.today/screen-orientation.html
+    // AND
+    // window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
+
+    // AS OF 2022 THE ONLY RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE is by using setInterval
+    let lastTimeWeCheckedTheOrientationWasINLINE;
+    function recordNewOrientationINLINE() {
+      if (screen.orientation) { // Mainly for Android (as of 2022)
+        lastTimeWeCheckedTheOrientationWasINLINE = screen.orientation.angle;
+      } else { // Mainly for iOS (as of 2022)
+        lastTimeWeCheckedTheOrientationWasINLINE = window.orientation;
+      }
+    }
+    recordNewOrientationINLINE();
+
+    setInterval(checkIfOrientationHasChangedINLINE, 200); // Keep checking
+    function checkIfOrientationHasChangedINLINE() {
+      if (screen.orientation) { // Mainly for Android (as of 2022)
+        // screen.orientation.angle returns 0 or 90 or 270 or 180
+        if (lastTimeWeCheckedTheOrientationWasINLINE != screen.orientation.angle) {
+          handlePortraitOrLandscapeINLINE();
+        }
+      } else { // Mainly for iOS (as of 2022)
+        // window.orientation returns 0 or 90 or -90 or 180
+        if (lastTimeWeCheckedTheOrientationWasINLINE != window.orientation) {
+          handlePortraitOrLandscapeINLINE();
+        }
+      }
     }
 
     // window.addEventListener("load",startMetrics,{once:true}); // Window load is too early
