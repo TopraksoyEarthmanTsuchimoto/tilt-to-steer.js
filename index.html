@@ -43,14 +43,21 @@
       setTimeout(afterAnUnnoticableDelay,100); // This solves the wrong-firing-order issue on Samsung Browser.
       function afterAnUnnoticableDelay() {
         if (screen.orientation) { // Mainly for Android (as of 2021)
-          document.getElementById('or7on').innerHTML = "Screen rotation:" + screen.orientation.angle; // Returns 0 or 90 or 270 or 180 // You'll need a div with ID: "or7on" to uncomment and test
+          document.getElementById('or7on').innerHTML = "Screen rotation:" + screen.orientation.angle; // Returns 0 or 90 or 270 or 180
         } else { // Mainly for iOS (as of 2021)
-          document.getElementById('or7on').innerHTML = "Screen rotation:" + window.orientation; // Returns 0 or 90 or -90 or 180 // You'll need a div with ID: "or7on" to uncomment and test
+          document.getElementById('or7on').innerHTML = "Screen rotation:" + window.orientation; // Returns 0 or 90 or -90 or 180
         }
       }
     }
     handlePortraitOrLandscapeINLINE(); // Set for the first time
-    window.addEventListener("resize",handlePortraitOrLandscapeINLINE); // Update when change happens
+    // CANNOT RELY ON window.addEventListener("resize",handlePortraitOrLandscapeINLINE);
+    // BECAUSE: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
+    if (screen.orientation) {
+      window.screen.orientation.addEventListener('change',handlePortraitOrLandscapeINLINE); // https://whatwebcando.today/screen-orientation.html
+    } else {
+      // According to MDN web docs this is deprecated, but is expected to work on iOS and WebView
+      window.addEventListener("orientationchange",handlePortraitOrLandscapeINLINE); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
+    }
 
     // window.addEventListener("load",startMetrics,{once:true}); // Window load is too early
     function startMetrics() {

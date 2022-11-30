@@ -138,8 +138,8 @@ function handleTilt(event) {
   // .
 }
 
-// window.addEventListener("load",startReadingTilt,{once:true}); // Uncomment if you want it to start immediately...
-// ...or call startReadingTilt() when necessary
+// IT COULD BE TOO EARLY IF YOU USE window.addEventListener("load",startReadingTilt,{once:true});
+// Make sure you call startReadingTilt() only after script loads
 function startReadingTilt() {
   window.addEventListener("deviceorientation",handleTilt);
 }
