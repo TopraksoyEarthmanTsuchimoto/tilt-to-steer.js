@@ -43,7 +43,7 @@ We just try to divide the `gamma` value by a number to tame its craziness as gim
   - See the [beta-jump issue](https://github.com/TopraksoyEarthmanTsuchimoto/tilt-to-steer.js/issues/2)
 
 ## Notes
-You may want to lock the screen orientation because as of 2022 it is impossible to detect the orientation change when user goes from 90 deg to 270 deg without triggering a portrait view in between.
+You may want to lock the screen orientation because as of 2022 the devices we used in our tests did not fire the orientation change event when the device goes from 90 deg to 270 deg without the user triggering a portrait view in between.
 ```
 var screenOrientationCannotBeLocked = false;
 function lockOrientation() {
