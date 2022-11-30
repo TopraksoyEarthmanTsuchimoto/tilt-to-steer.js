@@ -58,8 +58,8 @@
     }
 
     function handleTiltINLINE(event) {
-      document.getElementById('rawBeta').innerHTML = "raw beta:"+event.beta.toFixed(0); // Uncomment to test
-      document.getElementById('rawGamma').innerHTML = "raw gamma:"+event.gamma.toFixed(2); // Uncomment to test
+      document.getElementById('rawBeta').innerHTML = "raw beta:"+event.beta.toFixed(1); // Uncomment to test
+      document.getElementById('rawGamma').innerHTML = "raw gamma:"+event.gamma.toFixed(1); // Uncomment to test
 
       document.getElementById('steer').innerHTML = "steer: "+steerDeg.toFixed(1); // Uncomment to test
       document.getElementById('rotate').style.transform = "rotate("+smoothSteerDeg.toFixed(1)+"deg)"; // Uncomment to test
