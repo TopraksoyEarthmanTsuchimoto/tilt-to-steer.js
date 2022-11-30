@@ -31,28 +31,26 @@ function screenOrientationHasCertainlyChanged() {
       if (window.orientation == -90) {    theDeviceIsRotated="toTheRight";     }
       if (window.orientation == 180) {    theDeviceIsRotated="upsideDown";     }
     }
-    // Update
-    recordNewOrientation();
   }
 }
-screenOrientationHasCertainlyChanged(); // Set for the first time
+screenOrientationHasCertainlyChanged(); // Maybe it hasn't changed yet but we just have to do a first run to set the value of theDeviceIsRotated
 // CAUTION: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
 // THEREFORE WE CANNOT RELY ON window.addEventListener("resize",screenOrientationHasChanged);
-// THERE IS THE EXACT SAME PROBLEM WITH
+// AND THERE IS THE EXACT SAME PROBLEM WITH
 // window.screen.orientation.addEventListener('change',screenOrientationHasChanged); // https://whatwebcando.today/screen-orientation.html
-// AND
+// ALSO WITH
 // window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 
 // AS OF 2022 THE ONLY RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE is by using setInterval
 let lastTimeWeCheckedTheOrientationWas;
-function recordNewOrientation() {
+function saveLastDetectedScreenOrientation() {
   if (screen.orientation) { // Mainly for Android (as of 2022)
     lastTimeWeCheckedTheOrientationWas = screen.orientation.angle;
   } else { // Mainly for iOS (as of 2022)
     lastTimeWeCheckedTheOrientationWas = window.orientation;
   }
 }
-recordNewOrientation();
+saveLastDetectedScreenOrientation();
 
 setInterval(checkIfOrientationHasChanged, 200); // Keep checking
 function checkIfOrientationHasChanged() {
@@ -67,6 +65,8 @@ function checkIfOrientationHasChanged() {
       screenOrientationHasCertainlyChanged();
     }
   }
+  // Update
+  saveLastDetectedScreenOrientation();
 }
 
 // Use var instead of let for things that could be accessed from elsewhere
