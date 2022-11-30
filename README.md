@@ -45,7 +45,8 @@ You may want to lock the screen orientation because as of 2022 it is impossible 
 var screenOrientationCannotBeLocked = false;
 function lockOrientation() {
   setTimeout(function () {
-    if (screen.orientation) { // WORKS ONLY WHEN FULLSCREEN IS ON
+    if (screen.orientation) {
+      // THIS WORKS ONLY WHEN FULLSCREEN IS ON
       const lastOrientation = screen.orientation.type;
       parent.window.screen.orientation.lock(lastOrientation);
       // console.log("lockOrientation fired");
