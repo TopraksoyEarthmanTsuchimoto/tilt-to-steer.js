@@ -33,7 +33,15 @@ function handlePortraitOrLandscape() {
   }
 }
 handlePortraitOrLandscape(); // Set for the first time
-window.addEventListener("resize",handlePortraitOrLandscape); // Update when change happens
+// WARNING: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
+// THEREFORE WE CANNOT RELY ON window.addEventListener("resize",handlePortraitOrLandscape);
+if (screen.orientation) {
+  window.screen.orientation.addEventListener('change',handlePortraitOrLandscape); // https://whatwebcando.today/screen-orientation.html
+} else {
+  // According to MDN web docs this is deprecated, but is expected to work on iOS and WebView
+  window.addEventListener("orientationchange",handlePortraitOrLandscape); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
+}
+
 
 // Use var instead of let for things that could be accessed from elsewhere
 var b; // Adjust and use beta for steering when in landscape mode
