@@ -2,7 +2,7 @@
 #### Turn your tablet or phone into a steering wheel!
 This library converts raw `deviceorientation` data (mobile device tilt in degrees) into usable good numbers.
 
-- NOTE: This library does not feature a *perfect* solution to the gimbal lock problem. But the current version is **good enough**, for example, for steering a car in a racing game that would run in any screen orientation (landscape or portrait).
+- NOTE: This library does not feature a *perfect* solution to the gimbal lock problem. But the current version is **almost good enough**, for example, for steering a car in a racing game that would run in any screen orientation (landscape or portrait).
 
 ## **Try it live** (you will need an Android tablet or phone)
 
