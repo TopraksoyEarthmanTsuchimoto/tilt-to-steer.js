@@ -41,7 +41,7 @@ screenOrientationHasChanged(); // Maybe it hasn't changed yet but we just have t
 // ALSO WITH
 // window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 
-// THIS MEANS: AS OF 2022 THERE IS NO RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE even by using setInterval
+// THIS SADLY MEANS THAT AS OF 2022 THERE IS NO RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE even by using setInterval
 // BECAUSE neither screen.orientation.angle nor screen.orientation.type is updated when you go from 90 to 270 without triggering a portrait view in between
 /*
 // HERE IS THE CODE THAT COULD WORK IF THAT WAS NOT THE CASE
@@ -72,11 +72,12 @@ function checkIfOrientationHasChanged() {
   saveLastDetectedScreenOrientation();
 }
 */
-// So we just have to hope that the user will trigger a portrait mode between 90 and 270
+// So what we can do is either HOPE that the user will trigger a portrait mode between 90 and 270
+// Or try to lock the orientation if the device&browser support&allow it
 if (screen.orientation) {
-
+  window.screen.orientation.addEventListener('change',screenOrientationHasChanged); // https://whatwebcando.today/screen-orientation.html
 } else {
-
+  window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 }
 
 // ----------------

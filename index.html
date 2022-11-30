@@ -9,8 +9,8 @@
     <!-- You must use a mobile device to view this page -->
     <script defer src="tilt-to-steer.js" onload="startReadingTilt(); startMetrics();"></script>
     <!-- Uncomment the following to be able to use the browser console on mobile devices -->
-    <script src="eruda.min.js"></script>
-    <script>eruda.init();</script>
+    <!-- <script src="eruda.min.js"></script> -->
+    <!-- <script>eruda.init();</script> -->
 
     <style>
       div{width:270px; height: 42px; background-color: lightgrey; margin: 5px; font-size: 1.2rem; border-radius: 5px; padding: 3px;}
@@ -42,7 +42,7 @@
     function handlePortraitOrLandscapeINLINE() {
       setTimeout(afterAnUnnoticableDelay,100); // This solves the wrong-firing-order issue on Samsung Browser.
       function afterAnUnnoticableDelay() {
-        if (screen.orientation && false) { // Mainly for Android (as of 2021)
+        if (screen.orientation) { // Mainly for Android (as of 2021)
           console.log("display screen.orientation.angle:"+screen.orientation.angle);
           document.getElementById('screenRotationAngle').innerHTML = "Screen rotation:" + screen.orientation.angle; // Returns 0 or 90 or 270 or 180
         } else { // Mainly for iOS (as of 2021)
@@ -53,44 +53,21 @@
     }
     handlePortraitOrLandscapeINLINE(); // Set for the first time
     // CAUTION: RESIZE does not fire when switching from 90 to 270 directly (without triggering a portrait view in between)
-    // THEREFORE WE CANNOT RELY ON window.addEventListener("resize",screenOrientationHasChanged);
+    // THEREFORE WE CANNOT RELY ON window.addEventListener("resize",handlePortraitOrLandscapeINLINE);
     // THERE IS THE EXACT SAME PROBLEM WITH
-    // window.screen.orientation.addEventListener('change',screenOrientationHasChanged); // https://whatwebcando.today/screen-orientation.html
+    // window.screen.orientation.addEventListener('change',handlePortraitOrLandscapeINLINE); // https://whatwebcando.today/screen-orientation.html
     // AND
-    // window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
+    // window.addEventListener("orientationchange",handlePortraitOrLandscapeINLINE); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 
-    // AS OF 2022 THE ONLY RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE is by using setInterval
-    // ACTUALLY NO. Because it looks like screen.orientation.angle doesn't get updated when device goes from 90 to 270 and it keeps returning the wrong number unless it is forced to update by going portrait
-    let lastTimeWeCheckedTheOrientationWasINLINE;
-    function recordNewOrientationINLINE() {
-      if (screen.orientation && false) { // Mainly for Android (as of 2022)
-        console.log("saving   screen.orientation.type");
-        lastTimeWeCheckedTheOrientationWasINLINE = screen.orientation.type;
-      } else { // Mainly for iOS (as of 2022)
-        console.log("saving   window.orientation");
-        lastTimeWeCheckedTheOrientationWasINLINE = window.orientation;
-      }
-    }
-    recordNewOrientationINLINE();
+    // THIS SADLY MEANS THAT AS OF 2022 THERE IS NO RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE even by using setInterval
+    // BECAUSE neither screen.orientation.angle nor screen.orientation.type is updated when you go from 90 to 270 without triggering a portrait view in between
 
-    setInterval(checkIfOrientationHasChangedINLINE, 2200); // Keep checking
-    function checkIfOrientationHasChangedINLINE() {
-      console.log("Checking");
-      if (screen.orientation && false) { // Mainly for Android (as of 2022)
-        // screen.orientation.angle returns 0 or 90 or 270 or 180
-        if (lastTimeWeCheckedTheOrientationWasINLINE != screen.orientation.type) {
-          console.log("Change detected in screen.orientation.type");
-          handlePortraitOrLandscapeINLINE();
-        }
-      } else { // Mainly for iOS (as of 2022)
-        // window.orientation returns 0 or 90 or -90 or 180
-        if (lastTimeWeCheckedTheOrientationWasINLINE != window.orientation) {
-          console.log("Change detected in window.orientation");
-          handlePortraitOrLandscapeINLINE();
-        }
-      }
-      // Update
-      recordNewOrientationINLINE();
+    // So what we can do is either HOPE that the user will trigger a portrait mode between 90 and 270
+    // Or try to lock the orientation if the device&browser support&allow it
+    if (screen.orientation) {
+      window.screen.orientation.addEventListener('change',handlePortraitOrLandscapeINLINE); // https://whatwebcando.today/screen-orientation.html
+    } else {
+      window.addEventListener("orientationchange",handlePortraitOrLandscapeINLINE); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
     }
 
     // window.addEventListener("load",startMetrics,{once:true}); // Window load is too early
