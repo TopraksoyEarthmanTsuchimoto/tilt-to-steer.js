@@ -37,6 +37,25 @@
 
     <!-- THE CODE -->
     <script>
+    const main = document.getElementsByTagName('main')[0];
+    main.addEventListener("touchend",checkPermission,{once:true});
+    function checkPermission() {
+      // feature detect
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        alert("Choose allow to activate");
+        DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              // window.addEventListener('deviceorientation', () => {});
+              startReadingTilt(); startMetrics();
+            }
+          })
+          .catch(console.error);
+      } else {
+        // handle regular non iOS 13+ devices
+        console.log("DeviceOrientationEvent.requestPermission is not available");
+      }
+    }
     // window.addEventListener("load",startReadingTilt,{once:true}); // Start running tilt-to-steer.js // THROWS: Uncaught ReferenceError: startReadingTilt is not defined
 
     function handlePortraitOrLandscapeINLINE() {
