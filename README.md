@@ -17,7 +17,7 @@ and then you can rotate any element by changing its `transform: rotate()` or per
 You may want to use a device detector [like this](https://github.com/PoeHaH/devicedetector) or a ua-parser [like this](https://github.com/faisalman/ua-parser-js) to make sure that the user is on a mobile device before running the code.
 In addition to linking it like
 
-    <script defer src="tilt-to-steer.js"></script>
+    <script defer src="tilt-to-steer.js" onload="startReadingTilt();"></script>
 
 you can also inject tilt-to-steer.js only when needed in your app like this,
 
