@@ -60,11 +60,12 @@
     // window.addEventListener("orientationchange",screenOrientationHasChanged); // https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
 
     // AS OF 2022 THE ONLY RELIABLE WAY TO DETECT SCREEN ORIENTATION CHANGE is by using setInterval
+    // ACTUALLY NO. Because it looks like screen.orientation.angle doesn't get updated when device goes from 90 to 270 and keeps showing the wrong number
     let lastTimeWeCheckedTheOrientationWasINLINE;
     function recordNewOrientationINLINE() {
       if (screen.orientation) { // Mainly for Android (as of 2022)
-        console.log("saving   screen.orientation.angle");
-        lastTimeWeCheckedTheOrientationWasINLINE = screen.orientation.angle;
+        console.log("saving   screen.orientation.type");
+        lastTimeWeCheckedTheOrientationWasINLINE = screen.orientation.type;
       } else { // Mainly for iOS (as of 2022)
         console.log("saving   window.orientation");
         lastTimeWeCheckedTheOrientationWasINLINE = window.orientation;
@@ -77,8 +78,8 @@
       console.log("Checking");
       if (screen.orientation) { // Mainly for Android (as of 2022)
         // screen.orientation.angle returns 0 or 90 or 270 or 180
-        if (lastTimeWeCheckedTheOrientationWasINLINE != screen.orientation.angle) {
-          console.log("Change detected in screen.orientation.angle");
+        if (lastTimeWeCheckedTheOrientationWasINLINE != screen.orientation.type) {
+          console.log("Change detected in screen.orientation.type");
           handlePortraitOrLandscapeINLINE();
         }
       } else { // Mainly for iOS (as of 2022)
