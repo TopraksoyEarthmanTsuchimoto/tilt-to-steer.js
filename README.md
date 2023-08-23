@@ -51,8 +51,8 @@ function lockOrientation() {
     if (screen.orientation) {
       // THIS WORKS ONLY WHEN FULLSCREEN IS ON
       const lastOrientation = screen.orientation.type;
-      parent.window.screen.orientation.lock(lastOrientation);
-      // console.log("lockOrientation fired");
+      window.screen.orientation.lock(lastOrientation);
+      // console.log("lockOrientation fired 100 milliseconds ago");
     } else {
       screenOrientationCannotBeLocked = true;
     }
