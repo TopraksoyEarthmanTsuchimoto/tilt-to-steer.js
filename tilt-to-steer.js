@@ -55,7 +55,7 @@ function saveLastDetectedScreenOrientation() {
 }
 saveLastDetectedScreenOrientation();
 
-setInterval(checkIfOrientationHasChanged, 200); // Keep checking
+setInterval(checkIfOrientationHasChanged, 250); // Keep checking
 function checkIfOrientationHasChanged() {
   if (screen.orientation) { // Mainly for Android (as of 2022)
     // screen.orientation.angle returns 0 or 90 or 270 or 180
@@ -72,8 +72,11 @@ function checkIfOrientationHasChanged() {
   saveLastDetectedScreenOrientation();
 }
 */
-// So what we can do is either HOPE that the user will trigger a portrait mode between 90 and 270
+// So what we can do is,
+// Either HOPE that the user will trigger a portrait mode between 90 and 270; we never want to do that!
 // Or try to lock the orientation if the device&browser support&allow it
+// Or watch gamma and force update when threshold points are passed
+// Sony Experia phone gamma threshold is +25deg and -25deg
 if (screen.orientation) {
   window.screen.orientation.addEventListener('change',screenOrientationHasChanged); // https://whatwebcando.today/screen-orientation.html
 } else {
